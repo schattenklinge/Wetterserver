@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="backend" />
+		<Option platforms="Unix;" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option platforms="Unix;" />
+				<Option output="bin/Debug/backend" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option external_deps="https:/github.com/schattenklinge/Wetterserver-pi.git;" />
+				<Option additional_output="https:/github.com/schattenklinge/Wetterserver-pi.git;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/backend" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="https://github.com/schattenklinge/Wetterserver-pi.git" targets="Debug;Release;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="datafarming.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="datafarming.h">
+			<Option compiler="gcc" use="1" buildCommand="gcc -Wall -lusb -o" />
+		</Unit>
+		<Unit filename="mysqlconnection.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mysqlconnection.h" />
+		<Unit filename="te923com.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="te923com.h" />
+		<Unit filename="te923con.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="te923con.h" />
+		<Unit filename="te923usb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="te923usb.h" />
+		<Unit filename="version.h" />
+		<Extensions>
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" update_manifest="0" do_auto_increment="1" ask_to_increment="0" language="C" svn="1" svn_directory="https://github.com/schattenklinge/Wetterserver" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="AutoVersion" prefix="" />
+			</AutoVersioning>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
