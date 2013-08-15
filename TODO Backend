@@ -1,0 +1,21 @@
+/******************
+TODO
+Backend
+******************/
+
+Stationsspeicher:
+
+MYSQL DB connection erstellen,
+fehlende SQL INSERT's erstellen,
+INSERT's in die DB schreiben,
+Cronjob einrichten 
+
+Stations live Daten:
+
+Temp Tabelle erstellen,
+SQL INSERT's erstellen,
+Trigger bauen der auf die Schnittstelle lauscht,
+Job einrichten
+
+Berechnungen von Wetterdaten erstellen,
+SQL INSERT'S erstellen
