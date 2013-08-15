@@ -13,187 +13,121 @@ unsigned short bigmem = TRUE;
 enum output { rtdata, memdump, status };
 
 
+/*
+static char datetime, innenTemp, aussenTemp1, aussenTemp2, aussenTemp3, aussenTemp4, aussenTemp5, aussenHum1, aussenTemp2, aussenHum2, aussenTemp3, aussenHum3,
+            aussenTemp4, aussenHum4, aussenTemp5, aussenHum5, luftdruck, uv, vorhersage, sturmwarnung, windrichtung, windgeschwindigkeit, boengeschwindigkeit,
+            gefühlteTemp, regenmenge, ;
+*/
 
-void insertTemp(output=memdump){
-    tempdaten[];
+void insertSpeicher(char memsql[count]){
+    *output = memdump;
+    char *str[], *query;
+    char ptr = "', '";
+    memsql = query;
+    printf(%s, memsql);
     printData( Te923DataSet_t *data, char *iText ) {
-      int i;
-      printf( "%d:"  , data->timestamp );
+    int i;
+    str[0]= "INSERT INTO stationsdaten (datetime, innenTemp, innenHum, aussenTemp1, aussenHum1, aussenTemp2, aussenHum2, aussenTemp3, aussenHum3,"
+            "aussenTemp4, aussenHum4, aussenTemp5, aussenHum5, luftdruck, uv, vorhersage, sturmwarnung, windrichtung, windgeschwindigkeit, boengeschwindigkeit,"
+            "gefühlteTemp, regenmenge) VALUES ('";
+    str[1] = data->timestamp;
+    str[2] = ptr;
       for ( i = 0; i <= 5; i++ ) {
-
+        char innenTemp = "---";
+        char innenHum = "---";
+        char aussenTemp[4] = "---";
+        char aussenHum[4] = "---";
         if ( data->_t[i] == 0 )
-          printf( "%0.2f:", data->t[i] );
-        else
-          printf( "%s:", iText );
+            if(data->t[i]==0)
+             innenTemp = data->t[i];
+            else
+             aussenTemp[i] = data->t[i];
+         else
+            printf( "%s:", iText );
 
         if ( data->_h[i] == 0 )
-          printf( "%d:", data->h[i] );
-        else
-          printf( "%s:", iText );
+            if (data->h[i]==0)
+             innenHum = data->h[i];
+            else
+             aussenHum[i] = data->h[i];
+         else
+            printf( "%s:", iText );
+
+        str[3] = strcat(innenTemp+ptr+innenHum+ptr);
+        str[4] = strcat(aussenTemp[0]+ptr+aussenHum[0]+ptr);
+        str[5] = strcat(aussenTemp[1]+ptr+aussenHum[1]+ptr);
+        str[6] = strcat(aussenTemp[2]+ptr+aussenHum[2]+ptr);
+        str[7] = strcat(aussenTemp[3]+ptr+aussenHum[3]+ptr);
+        str[8] = strcat(aussenTemp[4]+ptr+aussenHum[4]+ptr);
       }
+
+      if ( data->_press == 0 )
+        str[9] = data->press;
+        str[10] = ptr;
+      else
+        printf( "%s:", iText );
+
       if ( data->_uv == 0 )
-        printf( "%0.2f:", data->uv );
+        str[11] = data->uv;
+        str[12] = ptr;
+      else
+        printf( "%s:", iText );
+
+      if ( data->_forecast == 0 )
+        str[13] = data->forecast;
+        str[14] = ptr;
+      else
+        printf( "%s:", iText );
+
+      if ( data->_storm == 0 )
+        str[15] = data->storm ;
+        str[16] = ptr;
+      else
+        printf( "%s:", iText );
+
+      if ( data->_wDir == 0 )
+        str[17] = data->wDir;
+        str[18] = ptr;
+      else
+        printf( "%s:", iText );
+
+      if ( data->_wSpeed == 0 )
+        str[19] = data->wSpeed;
+        str[20] = ptr;
+      else
+        printf( "%s:", iText );
+
+      if ( data->_wGust == 0 )
+        str[21] data->wGust;
+        str[22] = ptr;
       else
         printf( "%s:", iText );
 
       if ( data->_wChill == 0 )
-        printf( "%0.2f:", data->wChill );
+        str[23] = data->wChill;
+        str[24] = ptr;
       else
         printf( "%s:", iText );
 
-      printf( "\n" );
-    }
-}
-void insertTemp(output=memdump){
-    datensauge[];
-    printData( Te923DataSet_t *data, char *iText ) {
-  int i;
-  printf( "%d:"  , data->timestamp );
+      if ( data->_RainCount == 0 )
+        str[25] data->RainCount;
+        str[26] = "'); \0";
+      else
+        printf( "%s:", iText );
 
-  if ( data->_press == 0 )
-    printf( "%0.1f:", data->press );
-  else
-    printf( "%s:", iText );
-  if ( data->_forecast == 0 )
-    printf( "%d:", data->forecast );
-  else
-    printf( "%s:", iText );
-  if ( data->_RainCount == 0 )
-    printf( "%d", data->RainCount );
-  else
-    printf( "%s:", iText );
 
-  printf( "\n" );
+
+
+    for (i=0; i < 26; i++){
+        size+=strlen(str[i]);   /* Speicherplatz für den Anfragestring reservieren */
+        query = malloc(size + 1);
+        strcpy(query, str[0]);
+        for(i = 1; i < 9; i++){
+            strcat(query, str[i]);
+        }
     }
 }
 
-oid printData( Te923DataSet_t *data, char *iText ) {
-  int i;
-  printf( "%d:"  , data->timestamp );
-  for ( i = 0; i <= 5; i++ ) {
-
-    if ( data->_t[i] == 0 )
-      printf( "%0.2f:", data->t[i] );
-    else
-      printf( "%s:", iText );
-
-    if ( data->_h[i] == 0 )
-      printf( "%d:", data->h[i] );
-    else
-      printf( "%s:", iText );
-  }
-
-  if ( data->_press == 0 )
-    printf( "%0.1f:", data->press );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_uv == 0 )
-    printf( "%0.1f:", data->uv );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_forecast == 0 )
-    printf( "%d:", data->forecast );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_storm == 0 )
-    printf( "%d:", data->storm );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wDir == 0 )
-    printf( "%d:", data->wDir );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wSpeed == 0 )
-    printf( "%0.1f:", data->wSpeed );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wGust == 0 )
-    printf( "%0.1f:", data->wGust );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wChill == 0 )
-    printf( "%0.1f:", data->wChill );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_RainCount == 0 )
-    printf( "%d", data->RainCount );
-  else
-    printf( "%s:", iText );
-
-  printf( "\n" );
-}
-
-oid printData( Te923DataSet_t *data, char *iText ) {
-  int i;
-  printf( "%d:"  , data->timestamp );
-  for ( i = 0; i <= 5; i++ ) {
-
-    if ( data->_t[i] == 0 )
-      printf( "%0.2f:", data->t[i] );
-    else
-      printf( "%s:", iText );
-
-    if ( data->_h[i] == 0 )
-      printf( "%d:", data->h[i] );
-    else
-      printf( "%s:", iText );
-  }
-
-  if ( data->_press == 0 )
-    printf( "%0.1f:", data->press );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_uv == 0 )
-    printf( "%0.1f:", data->uv );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_forecast == 0 )
-    printf( "%d:", data->forecast );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_storm == 0 )
-    printf( "%d:", data->storm );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wDir == 0 )
-    printf( "%d:", data->wDir );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wSpeed == 0 )
-    printf( "%0.1f:", data->wSpeed );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wGust == 0 )
-    printf( "%0.1f:", data->wGust );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_wChill == 0 )
-    printf( "%0.1f:", data->wChill );
-  else
-    printf( "%s:", iText );
-
-  if ( data->_RainCount == 0 )
-    printf( "%d", data->RainCount );
-  else
-    printf( "%s:", iText );
-
-  printf( "\n" );
-}
 
   if ( iText == NULL )
     iText = "i";
