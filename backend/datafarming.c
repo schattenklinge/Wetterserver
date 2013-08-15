@@ -33,32 +33,20 @@ void insertSpeicher(char memsql[count]){
     str[1] = data->timestamp;
     str[2] = ptr;
       for ( i = 0; i <= 5; i++ ) {
-        char innenTemp = "---";
-        char innenHum = "---";
-        char aussenTemp[4] = "---";
-        char aussenHum[4] = "---";
+        char temp = "---";
+        char hum = "---";
         if ( data->_t[i] == 0 )
-            if(data->t[i]==0)
-             innenTemp = data->t[i];
-            else
-             aussenTemp[i] = data->t[i];
+             temp = data->t[i];
          else
             printf( "%s:", iText );
 
         if ( data->_h[i] == 0 )
-            if (data->h[i]==0)
-             innenHum = data->h[i];
-            else
-             aussenHum[i] = data->h[i];
+             hum = data->h[i];
          else
             printf( "%s:", iText );
-
-        str[3] = strcat(innenTemp+ptr+innenHum+ptr);
-        str[4] = strcat(aussenTemp[0]+ptr+aussenHum[0]+ptr);
-        str[5] = strcat(aussenTemp[1]+ptr+aussenHum[1]+ptr);
-        str[6] = strcat(aussenTemp[2]+ptr+aussenHum[2]+ptr);
-        str[7] = strcat(aussenTemp[3]+ptr+aussenHum[3]+ptr);
-        str[8] = strcat(aussenTemp[4]+ptr+aussenHum[4]+ptr);
+        
+        for(int e = 3; e <= 9 ; e++)
+            str[e] = strcat(temp+ptr+hum]+ptr);
       }
 
       if ( data->_press == 0 )
