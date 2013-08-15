@@ -46,7 +46,7 @@ void insertSpeicher(char memsql[count]){
             printf( "%s:", iText );
         
         for(int e = 3; e <= 9 ; e++)
-            str[e] = strcat(temp+ptr+hum]+ptr);
+            str[e] = strcat(temp+ptr+hum+ptr);
       }
 
       if ( data->_press == 0 )
